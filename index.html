@@ -1,34 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>CheerpJ Fullscreen Test</title>
-    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
-    <script src="M2.0.jar"></script>
-    <style>
-      /* Ensure no margins/padding, and the body/html fill the viewport */
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <script>
-      (async function () {
-        await cheerpjInit();
-        // Use window.innerWidth and window.innerHeight to fill the screen
-        cheerpjCreateDisplay(window.innerWidth, window.innerHeight);
-        await cheerpjRunJar("/app/M2.0.jar");
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft 4K</title>
 
-        // Optionally handle window resizing
-        window.addEventListener("resize", function() {
-          cheerpjResizeDisplay(window.innerWidth, window.innerHeight);
-        });
-      })();
+    <!-- CheerpJ loader -->
+    <script src="https://cjrtnc.leaningtech.com/2.5/loader.js"></script>
+
+    <!-- Load Java classes from base64-encoded JAR and run automatically -->
+    <script type="text/javascript">
+        window.onload = function() {
+            // The base64-encoded JAR file
+            const base64Jar = 'UEsDBBQACAgIAG+x20oAAAA...'; // Truncated for brevity
+
+            // Convert base64 to binary
+            const binaryJar = atob(base64Jar);
+            const len = binaryJar.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryJar.charCodeAt(i);
+            }
+
+            // Create a Blob from the binary data
+            const blob = new Blob([bytes], { type: 'application/java-archive' });
+
+            // Create a URL for the Blob
+            const jarUrl = URL.createObjectURL(blob);
+
+            // Initialize CheerpJ and load the JAR
+            CheerpJInit();
+            cheerpjLoadJar(jarUrl).then(() => {
+                // Automatically run the Java application once the JAR is loaded
+                cheerpjRunMain('MainClassName', []);
+            });
+        };
     </script>
-  </body>
+</head>
+<body>
+    
+</body>
 </html>
