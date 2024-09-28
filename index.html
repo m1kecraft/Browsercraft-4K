@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CheerpJ Fullscreen Test</title>
+    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+    <style>
+      /* Ensure no margins/padding, and the body/html fill the viewport */
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      (async function () {
+        await cheerpjInit();
+        // Use window.innerWidth and window.innerHeight to fill the screen
+        cheerpjCreateDisplay(window.innerWidth, window.innerHeight);
+        await cheerpjRunJar("/app/my_application_archive.jar");
+
+        // Optionally handle window resizing
+        window.addEventListener("resize", function() {
+          cheerpjResizeDisplay(window.innerWidth, window.innerHeight);
+        });
+      })();
+    </script>
+  </body>
+</html>
