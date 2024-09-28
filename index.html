@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>CheerpJ Fullscreen Test</title>
     <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+    <script src="M2.0.jar"></script>
     <style>
       /* Ensure no margins/padding, and the body/html fill the viewport */
       html, body {
@@ -21,7 +22,7 @@
         await cheerpjInit();
         // Use window.innerWidth and window.innerHeight to fill the screen
         cheerpjCreateDisplay(window.innerWidth, window.innerHeight);
-        await cheerpjRunJar("/app/my_application_archive.jar");
+        await cheerpjRunJar("/app/M2.0.jar");
 
         // Optionally handle window resizing
         window.addEventListener("resize", function() {
